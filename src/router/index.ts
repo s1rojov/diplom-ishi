@@ -18,19 +18,35 @@ import routes from './routes';
  */
 
 export default route(function (/* { store, ssrContext } */) {
-  const createHistory = process.env.SERVER
-    ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
+  // const createHistory = process.env.SERVER
+  //   ? createMemoryHistory
+  //   : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
 
   const Router = createRouter({
-    scrollBehavior: () => ({ left: 0, top: 0 }),
+    history: createWebHistory(),
     routes,
-
-    // Leave this as is and make changes in quasar.conf.js instead!
-    // quasar.conf.js -> build -> vueRouterMode
-    // quasar.conf.js -> build -> publicPath
-    history: createHistory(process.env.VUE_ROUTER_BASE),
+    scrollBehavior(_to, _from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition;
+      } else {
+        return { top: 0 };
+      }
+    }
   });
+
+  // token uchun
+  // Router.beforeEach((to, _, next) => {
+  //   const isAuthenticated: any = getItem('Authorization');
+  //   if (to.path !== '/login' && !isAuthenticated) {
+  //     next({ name: 'Login' });
+  //   } else if (to.meta.public && !!isAuthenticated) {
+  //     next({ name: 'hr' });
+  //   } else if (to.path === '' && isAuthenticated) {
+  //     next({ name: 'hr' });
+  //   } else {
+  //     next();
+  //   }
+  // });
 
   return Router;
 });
