@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, toRefs, computed } from 'vue';
+import { toRefs, computed } from 'vue';
 const emits = defineEmits(['selectedBtnClicked']);
 const props = defineProps({
   content: {

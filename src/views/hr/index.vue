@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const isOpen = ref<boolean>(false)
+// import { ref } from 'vue'
+// const isOpen = ref<boolean>(false)
 </script>
 <template>
     <router-view></router-view>
