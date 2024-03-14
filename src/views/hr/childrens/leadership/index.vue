@@ -42,7 +42,7 @@ function selectedItem(val: string) {
       </div>
     </div>
     <!-- modal -->
-    <CreateLeadershipModal />/
+    <CreateLeadershipModal />
     <NotificationModal :isOpenModal="isOpen" content="O'chirmoqchimisiz?" @selectedBtnClicked="test">
       <template #closeBtn>
         <BaseIcon name="close" class="w-5 h-5 cursor-pointer" @click="isOpen = false" />
