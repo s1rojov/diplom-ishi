@@ -3,9 +3,12 @@ import { PropType, ref } from 'vue';
 const emit = defineEmits(['selected', 'update:modelValue']);
 const props = defineProps({
   options: {
-    type: Array as PropType<{ id: number; fullname: string, shortname }[]>,
+    type: Array as PropType<{ id: number; fullname: string, shortname: string }[]>,
     requiered: true,
   },
+  modelValue: {
+    type: String
+  }
 });
 const selectedItem = ref<string>('Tashkilotingizni tanlang');
 const isOpen = ref<boolean>(false);

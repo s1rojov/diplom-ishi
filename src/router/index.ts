@@ -31,22 +31,20 @@ export default route(function (/* { store, ssrContext } */) {
       } else {
         return { top: 0 };
       }
-    }
+    },
   });
 
   // token uchun
-  // Router.beforeEach((to, _, next) => {
-  //   const isAuthenticated: any = getItem('Authorization');
-  //   if (to.path !== '/login' && !isAuthenticated) {
-  //     next({ name: 'Login' });
-  //   } else if (to.meta.public && !!isAuthenticated) {
-  //     next({ name: 'hr' });
-  //   } else if (to.path === '' && isAuthenticated) {
-  //     next({ name: 'hr' });
-  //   } else {
-  //     next();
-  //   }
-  // });
+  Router.beforeEach((to, _, next) => {
+    const isAuthenticated: any = sessionStorage.getItem('access');
+    if (to.path !== '/login' && !isAuthenticated) {
+      next({ name: 'Login page' });
+    } else if (to.path === '' && !!isAuthenticated) {
+      next({ name: 'HR' });
+    } else {
+      next();
+    }
+  });
 
   return Router;
 });

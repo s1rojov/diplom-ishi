@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('authStore', {
       user: {
         login: '',
         password: '',
-        org_id: null,
+        org_id: '',
       },
     };
   },
@@ -25,18 +25,18 @@ export const useAuthStore = defineStore('authStore', {
       await api
         .post('auth', this.user)
         .then((res: any) => {
-          // console.log(res.data);
+          sessionStorage.setItem('access', 'true');
           if (res.data.access) {
-            sessionStorage.setItem('access', 'true');
-            toast({
-              position: 'top-right',
-              type: 'positive',
-              message: 'Muvaffaqqiyatli kirdingiz',
-              time: 3000,
-            });
+            this.router.push({ name: 'HR' });
           }
+          toast({
+            position: 'top-right',
+            type: 'positive',
+            message: 'Muvaffaqqiyatli kirdingiz',
+            time: 3000,
+          });
         })
-        .catch((err: any) => {
+        .catch(() => {
           toast({
             position: 'top-right',
             type: 'negative',
