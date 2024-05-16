@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-// import { useGet } from 'src/api';
 import { api } from 'boot/axios';
 import { useToastification } from 'src/helpers/toast';
 const { toast } = useToastification();
@@ -7,11 +6,12 @@ export const useAuthStore = defineStore('authStore', {
   state: () => {
     return {
       organizationList: [],
-      user: {
+      data: {
         login: '',
         password: '',
         org_id: '',
       },
+      admin: {},
     };
   },
   actions: {
@@ -23,11 +23,12 @@ export const useAuthStore = defineStore('authStore', {
 
     async getAccessToSystem() {
       await api
-        .post('auth', this.user)
+        .post('auth', this.data)
         .then((res: any) => {
+          this.admin = res.data?.admin;
           sessionStorage.setItem('access', 'true');
           if (res.data.access) {
-            this.router.push({ name: 'HR' });
+            this.router.push({ name: 'Organization' });
           }
           toast({
             position: 'top-right',

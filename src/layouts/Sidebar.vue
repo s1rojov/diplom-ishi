@@ -6,9 +6,9 @@ const { hrItems }: any = useLayoutFn();
 <template>
   <div class="border-r border-neutral-400/40 h-full py-5">
     <div class="flex justify-center">
-      <img src="/images/logo.png" class="w-[62px] h-[62px]" alt="logo" />
+      <p class="text-lg uppercase font-semibold">hr system</p>
     </div>
-    <div class="pt-5">
+    <div class="pt-3">
       <div>
         <RouterLink v-for="(item, index) in hrItems" :key="index" :to="item.router" v-slot="{ isActive }">
           <div class="py-3 group relative hover:bg-[#C49E5E]/10 cursor-pointer block"

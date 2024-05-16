@@ -5,7 +5,7 @@ import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from 'src/views/auth/store';
 const store = useAuthStore();
-const { organizationList, user } = storeToRefs(store);
+const { organizationList, data } = storeToRefs(store);
 const { getAllOrganizations, getAccessToSystem } = store;
 onMounted(() => {
   getAllOrganizations()
@@ -21,15 +21,15 @@ onMounted(() => {
       <div class="flex flex-col gap-3">
         <div>
           <p class="text-base text-zinc-950 pb-1">Login</p>
-          <BaseInput type="text" placeholder="Your login" v-model="user.login" />
+          <BaseInput type="text" placeholder="Your login" v-model="data.login" />
         </div>
         <div>
           <p class="text-base text-zinc-950 pb-1">Password</p>
-          <BaseInput type="text" placeholder="Your password" v-model="user.password" />
+          <BaseInput type="text" placeholder="Your password" v-model="data.password" />
         </div>
         <div>
           <p class="text-base text-zinc-950 pb-1">Tashkilotingizni tanlang</p>
-          <GeneralSelect :options="organizationList" v-model="user.org_id" />
+          <GeneralSelect :options="organizationList" v-model="data.org_id" />
         </div>
         <BaseButton label="Kirish" class="w-full" @click="getAccessToSystem" />
       </div>

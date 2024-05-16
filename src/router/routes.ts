@@ -10,50 +10,50 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: 'hr',
+        path: '',
         name: 'HR',
         component: () => import('src/views/hr/index.vue'),
         children: [
           {
-            path: '',
+            path: 'organization',
+            name: 'Organization',
+            component: () =>
+              import('src/views/hr/childrens/organization/index.vue'),
+          },
+          {
+            path: 'leadership',
             name: 'Leadership',
             component: () =>
               import('src/views/hr/childrens/leadership/index.vue'),
           },
           {
-            path: 'department',
-            name: 'Department',
-            component: () =>
-              import('src/views/hr/childrens/department/index.vue'),
+            path: 'faculty',
+            name: 'Faculty',
+            component: () => import('src/views/hr/childrens/faculty/index.vue'),
           },
-          {
-            path: 'direction',
-            name: 'Direction',
-            component: () =>
-              import('src/views/hr/childrens/direction/index.vue'),
-          },
-          {
-            path: 'division',
-            name: 'Division',
-            component: () =>
-              import('src/views/hr/childrens/division/index.vue'),
-          },
-          {
-            path: 'kafedra',
-            name: 'Kafedra',
-            component: () => import('src/views/hr/childrens/kafedra/index.vue'),
-          },
-          {
-            path: 'position',
-            name: 'Position hr',
-            component: () =>
-              import('src/views/hr/childrens/position/index.vue'),
-          },
-          {
-            path: 'shtat',
-            name: 'Shtat',
-            component: () => import('src/views/hr/childrens/shtat/index.vue'),
-          },
+          // {
+          //   path: 'department',
+          //   name: 'Department',
+          //   component: () =>
+          //     import('src/views/hr/childrens/department/index.vue'),
+          // },
+          // {
+          //   path: 'direction',
+          //   name: 'Direction',
+          //   component: () =>
+          //     import('src/views/hr/childrens/direction/index.vue'),
+          // },
+          // {
+          //   path: 'kafedra',
+          //   name: 'Kafedra',
+          //   component: () => import('src/views/hr/childrens/kafedra/index.vue'),
+          // },
+          // {
+          //   path: 'position',
+          //   name: 'Position hr',
+          //   component: () =>
+          //     import('src/views/hr/childrens/position/index.vue'),
+          // },
         ],
       },
       {

@@ -1,29 +1,17 @@
-import { defineStore } from 'pinia'
-
+import { defineStore } from 'pinia';
+import { api } from 'boot/axios';
 export const useHrStore = defineStore('hr', {
-    state: () => {
-        return {
-            isCreateModalOpen: false,
-            leadershipData: {
-                img: '',
-                fullname: '',
-                position: '',
-                phone: '',
-                email: '',
-                admission: '',
-                experience: '',
-                obligation: ''
-            },
-            isDivisionModal: false,
-            divisionData: {
-                img: '',
-                name: '',
-                position: '',
-                leadership: ''
-            },
-            isDepartmentModal: false,
-            isDirectionModal: false,
-            isKafedraModal: false
-        }
+  state: () => {
+    return {
+      isCreateModalOpen: false,
+      facultyModal: false,
+    };
+  },
+  actions: {
+    getOranizationInfo(id: any) {
+      api.get(`organization/${id}`).then((res: any) => {
+        return res.data;
+      });
     },
-})
+  },
+});
