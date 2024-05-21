@@ -27,6 +27,7 @@ export const useAuthStore = defineStore('authStore', {
         .then((res: any) => {
           this.admin = res.data?.admin;
           sessionStorage.setItem('access', 'true');
+          sessionStorage.setItem('orgId', `${res.data?.admin.org_id}`);
           if (res.data.access) {
             this.router.push({ name: 'Organization' });
           }

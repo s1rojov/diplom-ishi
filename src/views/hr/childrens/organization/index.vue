@@ -1,19 +1,30 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useOrgStore } from 'src/views/hr/childrens/organization/store'
-import { useAuthStore } from 'src/views/auth/store';
 import BaseModal from 'src/components/BaseModal/index.vue'
 import BaseInput from 'src/components/BaseInput/index.vue'
 import BaseTextarea from 'src/components/BaseTextarea/index.vue'
-const storeAuth = useAuthStore();
-const { data } = storeToRefs(storeAuth);
 const store = useOrgStore()
+const currentOrgInfo = ref<any>(
+  {
+    id: '',
+    fullname: '',
+    shortname: '',
+    description: '',
+  },
+)
 const { organization, organizationModal }: any = storeToRefs(store)
-const { getOranizationInfo } = store
+const { getOranizationInfo, updateOrganization } = store
 onMounted(() => {
-  getOranizationInfo(data.value.org_id)
+  getOranizationInfo()
+  currentOrgInfo.value = organization.value
 })
+
+function updateOrgInfo() {
+  updateOrganization(currentOrgInfo.value)
+  organizationModal.value = false
+}
 </script>
 <template>
   <div class="px-7 flex flex-col gap-3 pt-3">
@@ -33,19 +44,19 @@ onMounted(() => {
     <BaseIcon name="close" class="w-5 h-5 cursor-pointer absolute right-5 top-5" @click="organizationModal = false" />
     <div class="mt-10">
       <p class="mb-2">Tashkilotingizni qisqa nomini kiriting</p>
-      <BaseInput placeholder="Short name" />
+      <BaseInput placeholder="Short name" v-model="currentOrgInfo.shortname" />
     </div>
     <div class="mt-3">
       <p class="mb-2">Tashkilotingizni to'liq nomini kiriting</p>
-      <BaseInput placeholder="Full name" />
+      <BaseInput placeholder="Full name" v-model="currentOrgInfo.fullname" />
     </div>
     <div class="mt-3">
       <p class="mb-2">Tashkilotingizni qisqa nomini kiriting</p>
-      <BaseTextarea placeholder="Short name" />
+      <BaseTextarea placeholder="Description" v-model="currentOrgInfo.description" />
     </div>
     <div class="flex items-center mt-3 justify-end gap-3">
       <BaseButton label="Bekor qilish" @click="organizationModal = false" />
-      <BaseButton label="Saqlash" @click="organizationModal = true" />
+      <BaseButton label="Saqlash" @click="updateOrgInfo" />
     </div>
   </BaseModal>
 </template>

@@ -4,18 +4,26 @@ export const useOrgStore = defineStore('org', {
   state: () => {
     return {
       organizationModal: false,
-      organization: {},
+      organization: {
+        id: '',
+        fullname: '',
+        shortname: '',
+        description: '',
+      },
     };
   },
   actions: {
-    getOranizationInfo(id: any) {
-      api.get(`organization/${id}`).then((res: any) => {
+    getOranizationInfo() {
+      const orgId = sessionStorage.getItem('orgId');
+      api.get(`organization/${orgId}`).then((res: any) => {
         this.organization = res.data;
+        return res.data;
       });
     },
-    updateOrganization(id: any) {
-      api.put(`organization/${id}`).then((res: any) => {
-        this.getOranizationInfo(id);
+    updateOrganization(data: any) {
+      const orgId = sessionStorage.getItem('orgId');
+      api.put(`organization/${orgId}`, data).then(() => {
+        this.getOranizationInfo();
       });
     },
   },
