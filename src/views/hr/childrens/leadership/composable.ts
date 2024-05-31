@@ -1,24 +1,39 @@
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useLeaderStore } from './store';
 export function useLeadershipFn() {
-  const isItemList = ref<boolean>(true);
-  const leadershipItems = ref<any>([
-    {
-      name: 'Mavlanov Axmadjаn Xakimjanovichvich',
-      position: "Toshkent temir yo'l texnikumi direktori",
-      phone: '+998979997755',
-      email: 'info@example.com',
-      acceptance: 'Du (10:00-12:00)',
-    },
-    {
-      name: 'Mavlanov Axmadjаn Xakimjanovichvich',
-      position: "Toshkent temir yo'l texnikumi direktori",
-      phone: '+998979997755',
-      email: 'info@example.com',
-      acceptance: 'Du (10:00-12:00)',
-    },
-  ]);
+  const store = useLeaderStore()
+  const { getAllLeader, deleteLeader } = store
+  const { data, notifyModal } = storeToRefs(store)
+
+  const selectedItemId = ref<any>(null)
+  const updateItemFn = (id: any) => {
+    console.log(id)
+  };
+
+  const deleteItemFn = (id: any) => {
+    notifyModal.value = true
+    selectedItemId.value = id
+  }
+
+  const actionFn = (val: string) => {
+    if ((val === 'close') || (val === 'no')) {
+      notifyModal.value = false
+    }
+    else if (val === 'yes') {
+      deleteLeader(selectedItemId.value).then(() => {
+        notifyModal.value = false
+      })
+    }
+  }
+
+  onMounted(() => {
+    getAllLeader()
+  })
   return {
-    leadershipItems,
-    isItemList,
+    data,
+    updateItemFn,
+    deleteItemFn,
+    actionFn
   };
 }

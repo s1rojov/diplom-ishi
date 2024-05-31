@@ -4,9 +4,9 @@ export function useLayoutFn(): any {
   const isEnter = ref<boolean>(false);
   const hrItems = ref<SidebarItem[]>([
     {
-      title: 'Tashkilot',
+      title: 'Dashboard',
       icon: 'leadership',
-      router: '/organization',
+      router: '/dashboard',
     },
     {
       title: 'Rahbariyat',

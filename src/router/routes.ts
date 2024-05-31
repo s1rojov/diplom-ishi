@@ -15,10 +15,10 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/views/hr/index.vue'),
         children: [
           {
-            path: 'organization',
-            name: 'Organization',
+            path: 'dashboard',
+            name: 'Dashboard',
             component: () =>
-              import('src/views/hr/childrens/organization/index.vue'),
+              import('src/views/hr/childrens/dashboard/index.vue'),
           },
           {
             path: 'leadership',

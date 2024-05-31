@@ -20,13 +20,13 @@ toRefs(props);
 <template>
   <BaseModal v-model="isOpen" customClass="w-1/3 bg-white p-5">
     <div>
-      <div class="flex justify-end">
-        <slot name="closeBtn"></slot>
+      <div class="flex justify-between items-center">
+        <p class="text-base select-none py-2">
+          {{ props.content }}
+        </p>
+        <BaseIcon @click="clickedBtn('close')" name="close" class="cursor-pointer w-6 h-6" />
       </div>
-      <p class="text-lg py-2">
-        {{ props.content }}
-      </p>
-      <div class="flex items-center justify-between pt-5">
+      <div class="grid grid-cols-2 gap-5 mt-5">
         <BaseButton label="Yo'q" @click="clickedBtn('no')" />
         <BaseButton label="Xa" @click="clickedBtn('yes')" />
       </div>

@@ -9,11 +9,5 @@ const props = defineProps({
 toRefs(props);
 </script>
 <template>
-  <div>
-    <q-btn
-      :label="props.label"
-      no-caps
-      class="bg-[#C49E5E] text-white w-full px-16 rounded-lg"
-    />
-  </div>
+  <q-btn :label="props.label" no-caps class="bg-[#C49E5E] text-white w-full rounded-lg" />
 </template>

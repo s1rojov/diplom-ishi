@@ -5,31 +5,22 @@ const { toast } = useToastification();
 export const useAuthStore = defineStore('authStore', {
   state: () => {
     return {
-      organizationList: [],
       data: {
         login: '',
         password: '',
-        org_id: '',
       },
-      admin: {},
+      admin: {}
     };
   },
   actions: {
-    async getAllOrganizations() {
-      await api.get('organization').then((res: any) => {
-        this.organizationList = res.data;
-      });
-    },
-
     async getAccessToSystem() {
       await api
         .post('auth', this.data)
         .then((res: any) => {
           this.admin = res.data?.admin;
-          sessionStorage.setItem('access', 'true');
-          sessionStorage.setItem('orgId', `${res.data?.admin.org_id}`);
           if (res.data.access) {
-            this.router.push({ name: 'Organization' });
+            sessionStorage.setItem('access', 'true');
+            this.router.push({ name: 'Dashboard' });
           }
           toast({
             position: 'top-right',

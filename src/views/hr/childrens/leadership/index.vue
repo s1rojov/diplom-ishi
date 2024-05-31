@@ -1,26 +1,13 @@
 <script setup lang="ts">
-import BaseCard from 'src/components/BaseCard/index.vue';
-import { useLeadershipFn } from 'src/views/hr/childrens/leadership/composable';
-import CreateLeadershipModal from 'src/views/hr/components/CreateLeadershipModal/index.vue';
-import LeadershipTable from 'src/views/hr/childrens/leadership/components/LeadershipTable/index.vue';
-import NotificationModal from 'src/components/NotificationModal/index.vue';
+import BaseLeadershipCard from 'src/components/BaseLeadershipCard/index.vue'
+import NotificationModal from 'src/components/NotificationModal/index.vue'
+import { useLeadershipFn } from './composable'
 import { storeToRefs } from 'pinia';
-import { useHrStore } from 'src/views/hr/store';
-import { ref } from 'vue';
-const store = useHrStore();
-const { isCreateModalOpen } = storeToRefs(store);
-const { leadershipItems, isItemList } = useLeadershipFn();
-const isOpen = ref<boolean>(false);
-function test(val: string) {
-  if (val === 'no') {
-    isOpen.value = false;
-  }
-}
-function selectedItem(val: string) {
-  if (val === 'delete') {
-    isOpen.value = true;
-  }
-}
+import { useLeaderStore } from './store';
+const store = useLeaderStore()
+const { notifyModal } = storeToRefs(store)
+const { data, deleteItemFn, updateItemFn, actionFn }: any = useLeadershipFn()
+
 </script>
 <template>
   <div class="px-7 flex flex-col gap-3 pt-3">
@@ -28,34 +15,22 @@ function selectedItem(val: string) {
       <div>
         <div class="text-zinc-950 text-lg font-semibold leading-relaxed tracking-wide">
           Rahbariyat
-          <sup>3</sup>
+          <sup>{{ data.length }}</sup>
         </div>
         <span class="text-neutral-400 text-xs font-normal leading-normal tracking-wide">Ushbu bo’limda katalog
           yaratishingiz</span>
       </div>
       <div class="flex items-center gap-2">
-        <BaseIcon name="list" class="w-5 cursor-pointer h-5" :class="[isItemList ? 'text-[#C49E5E]' : 'text-neutral-400']"
-          @click="isItemList = true" />
-        <BaseIcon name="card" class="w-5 h-5 cursor-pointer"
-          :class="[!isItemList ? 'text-[#C49E5E]' : 'text-neutral-400']" @click="isItemList = false" />
-        <BaseButton @click="isCreateModalOpen = true" label="Yaratish" />
+        <BaseButton label="Yaratish" class="px-16" />
       </div>
     </div>
-    <!-- modal -->
-    <CreateLeadershipModal />
-    <NotificationModal :isOpenModal="isOpen" content="O'chirmoqchimisiz?" @selectedBtnClicked="test">
-      <template #closeBtn>
-        <BaseIcon name="close" class="w-5 h-5 cursor-pointer" @click="isOpen = false" />
-      </template>
+    <div class="h-[73vh] grid grid-cols-3">
+      <BaseLeadershipCard v-for="item, index in data" :data="item" :key="index" @update="updateItemFn"
+        @delete="deleteItemFn" />
+    </div>
+    <NotificationModal :isOpenModal="notifyModal" content="Ro'yhatdan o'chirmoqchimisiz?"
+      @selectedBtnClicked="actionFn">
     </NotificationModal>
-    <div v-if="!isItemList" class="grid grid-cols-2 gap-5">
-      <div v-for="(item, index) in leadershipItems" :key="index">
-        <BaseCard :card-data="item" @selected-action-item="selectedItem" />
-      </div>
-    </div>
-    <div class="h-[82vh]">
-      <LeadershipTable v-if="isItemList" />
-    </div>
   </div>
 </template>
 <style scoped>

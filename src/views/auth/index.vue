@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import BaseInput from 'src/components/BaseInput/index.vue'
-import GeneralSelect from 'src/components/GeneralSelect/index.vue'
-import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from 'src/views/auth/store';
 const store = useAuthStore();
-const { organizationList, data } = storeToRefs(store);
-const { getAllOrganizations, getAccessToSystem } = store;
-onMounted(() => {
-  getAllOrganizations()
-})
+const { data } = storeToRefs(store);
+const { getAccessToSystem } = store;
 </script>
 <template>
   <div class="absolute flex items-center top-0 left-0 bottom-0 right-0 justify-center m-auto">
@@ -26,10 +21,6 @@ onMounted(() => {
         <div>
           <p class="text-base text-zinc-950 pb-1">Password</p>
           <BaseInput type="text" placeholder="Your password" v-model="data.password" />
-        </div>
-        <div>
-          <p class="text-base text-zinc-950 pb-1">Tashkilotingizni tanlang</p>
-          <GeneralSelect :options="organizationList" v-model="data.org_id" />
         </div>
         <BaseButton label="Kirish" class="w-full" @click="getAccessToSystem" />
       </div>
