@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BaseLeadershipCard from 'src/components/BaseLeadershipCard/index.vue'
 import NotificationModal from 'src/components/NotificationModal/index.vue'
+import LeadershipModal from 'src/components/LeadershipModal/index.vue'
 import { useLeadershipFn } from './composable'
 import { storeToRefs } from 'pinia';
 import { useLeaderStore } from './store';
@@ -31,6 +32,7 @@ const { data, deleteItemFn, updateItemFn, actionFn }: any = useLeadershipFn()
     <NotificationModal :isOpenModal="notifyModal" content="Ro'yhatdan o'chirmoqchimisiz?"
       @selectedBtnClicked="actionFn">
     </NotificationModal>
+    <LeadershipModal />
   </div>
 </template>
 <style scoped>

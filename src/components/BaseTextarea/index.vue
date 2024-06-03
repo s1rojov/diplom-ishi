@@ -21,7 +21,7 @@ const props = defineProps({
 });
 </script>
 <template>
-  <textarea rows="10"
+  <textarea rows="5"
     class="w-full border rounded-lg placeholder:text-[#575757] py-2 px-[10px] bg-[#F8F8F9] text-base text-[#575757] placeholder:text-base placeholder:font-normal placeholder:leading-3 outline-none focus:border-[#C49E5E]"
     :placeholder="props.placeholder" :value="props.modelValue" @input="
       $emit('update:modelValue', ($event.target as HTMLInputElement).value)
