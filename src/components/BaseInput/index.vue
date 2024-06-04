@@ -13,11 +13,6 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  // size: {
-  //   type: String,
-  //   default: 'full',
-  //   validator: (value: string) => ['sm', 'md', 'full'].includes(value)
-  // }
 });
 </script>
 <template>

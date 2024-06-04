@@ -6,7 +6,7 @@ export const useLeaderStore = defineStore('leaderStore', {
     state: () => {
         return {
             data: [],
-            notifyModal: false
+            notifyModal: false,
         };
     },
     actions: {
@@ -36,5 +36,22 @@ export const useLeaderStore = defineStore('leaderStore', {
                 });
             })
         },
+        async createNewLeader(val: any) {
+            api.post('/leadership', val).then(() => {
+                toast({
+                    position: 'top-right',
+                    type: 'positive',
+                    message: "Muvaffaqqiyatli qo'shildi",
+                    time: 3000,
+                });
+            }).catch((error: any) => {
+                toast({
+                    position: 'top-right',
+                    type: 'negative',
+                    message: error.message,
+                    time: 3000,
+                });
+            })
+        }
     },
 });

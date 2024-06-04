@@ -7,7 +7,7 @@ import { storeToRefs } from 'pinia';
 import { useLeaderStore } from './store';
 const store = useLeaderStore()
 const { notifyModal } = storeToRefs(store)
-const { data, deleteItemFn, updateItemFn, actionFn }: any = useLeadershipFn()
+const { data, deleteItemFn, updateItemFn, actionFn, leader }: any = useLeadershipFn()
 
 </script>
 <template>
@@ -32,7 +32,7 @@ const { data, deleteItemFn, updateItemFn, actionFn }: any = useLeadershipFn()
     <NotificationModal :isOpenModal="notifyModal" content="Ro'yhatdan o'chirmoqchimisiz?"
       @selectedBtnClicked="actionFn">
     </NotificationModal>
-    <LeadershipModal />
+    <LeadershipModal :data="leader" />
   </div>
 </template>
 <style scoped>

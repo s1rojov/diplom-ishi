@@ -3,8 +3,18 @@ import { storeToRefs } from 'pinia';
 import { useLeaderStore } from './store';
 export function useLeadershipFn() {
   const store = useLeaderStore()
-  const { getAllLeader, deleteLeader } = store
+  const { getAllLeader, deleteLeader, createNewLeader } = store
   const { data, notifyModal } = storeToRefs(store)
+  const leader = ref<any>({
+    fullname: '',
+    phone: '',
+    position: '',
+    address: '',
+    birthday: '',
+    pass_information: '',
+    experience: ''
+  })
+
 
   const selectedItemId = ref<any>(null)
   const updateItemFn = (id: any) => {
@@ -34,6 +44,7 @@ export function useLeadershipFn() {
     data,
     updateItemFn,
     deleteItemFn,
-    actionFn
+    actionFn,
+    leader
   };
 }
