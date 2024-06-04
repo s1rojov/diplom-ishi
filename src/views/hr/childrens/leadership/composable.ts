@@ -4,7 +4,7 @@ import { useLeaderStore } from './store';
 export function useLeadershipFn() {
   const store = useLeaderStore()
   const { getAllLeader, deleteLeader, createNewLeader } = store
-  const { data, notifyModal } = storeToRefs(store)
+  const { data, notifyModal, createModal } = storeToRefs(store)
   const leader = ref<any>({
     fullname: '',
     phone: '',
@@ -20,6 +20,27 @@ export function useLeadershipFn() {
   const updateItemFn = (id: any) => {
     console.log(id)
   };
+
+  function modalClicked(val: string) {
+    if (val == 'cancel') {
+      createModal.value = false
+      leader.value = {
+        fullname: '',
+        phone: '',
+        position: '',
+        address: '',
+        birthday: '',
+        pass_information: '',
+        experience: ''
+      }
+
+    }
+    else if (val == 'save') {
+      createNewLeader(leader.value).then(() => {
+        createModal.value = false
+      })
+    }
+  }
 
   const deleteItemFn = (id: any) => {
     notifyModal.value = true
@@ -45,6 +66,7 @@ export function useLeadershipFn() {
     updateItemFn,
     deleteItemFn,
     actionFn,
+    modalClicked,
     leader
   };
 }

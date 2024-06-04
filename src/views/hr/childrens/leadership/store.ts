@@ -7,6 +7,7 @@ export const useLeaderStore = defineStore('leaderStore', {
         return {
             data: [],
             notifyModal: false,
+            createModal: false
         };
     },
     actions: {
@@ -38,6 +39,7 @@ export const useLeaderStore = defineStore('leaderStore', {
         },
         async createNewLeader(val: any) {
             api.post('/leadership', val).then(() => {
+                this.getAllLeader()
                 toast({
                     position: 'top-right',
                     type: 'positive',

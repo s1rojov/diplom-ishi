@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import BaseLeadershipCard from 'src/components/BaseLeadershipCard/index.vue'
 import NotificationModal from 'src/components/NotificationModal/index.vue'
-import LeadershipModal from 'src/components/LeadershipModal/index.vue'
+import BaseTextarea from 'src/components/BaseTextarea/index.vue'
+import BaseDatepicker from 'src/components/BaseDatepicker/index.vue'
 import { useLeadershipFn } from './composable'
 import { storeToRefs } from 'pinia';
 import { useLeaderStore } from './store';
 const store = useLeaderStore()
-const { notifyModal } = storeToRefs(store)
-const { data, deleteItemFn, updateItemFn, actionFn, leader }: any = useLeadershipFn()
+const { notifyModal, createModal } = storeToRefs(store)
+const { data, deleteItemFn, updateItemFn, actionFn, leader, modalClicked }: any = useLeadershipFn()
 
 </script>
 <template>
@@ -22,17 +23,59 @@ const { data, deleteItemFn, updateItemFn, actionFn, leader }: any = useLeadershi
           yaratishingiz</span>
       </div>
       <div class="flex items-center gap-2">
-        <BaseButton label="Yaratish" class="px-16" />
+        <BaseButton label="Yaratish" class="px-16" @click="createModal = true" />
       </div>
     </div>
-    <div class="h-[73vh] grid grid-cols-3">
+    <div class="h-[73vh] grid grid-cols-3 gap-5 scrollbarActive overflow-y-scroll">
       <BaseLeadershipCard v-for="item, index in data" :data="item" :key="index" @update="updateItemFn"
         @delete="deleteItemFn" />
     </div>
     <NotificationModal :isOpenModal="notifyModal" content="Ro'yhatdan o'chirmoqchimisiz?"
       @selectedBtnClicked="actionFn">
     </NotificationModal>
-    <LeadershipModal :data="leader" />
+    <!-- create modal -->
+
+    <BaseModal v-model="createModal" customClass="w-1/3 bg-white p-5">
+      <div class="flex justify-end">
+        <BaseIcon @click="createModal = false" name="close" class="cursor-pointer w-6 h-6" />
+      </div>
+      <div class="mt-3">
+        <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">To'liq ish sharifni kiriting
+        </p>
+        <BaseInput class="mt-1" placeholder="F.I.O" v-model="leader.fullname" />
+      </div>
+      <div class="mt-2">
+        <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Telefon raqamni kiriting</p>
+        <BaseInput class="mt-1" placeholder="Telefon raqam" v-model="leader.phone" />
+      </div>
+      <div class="mt-2">
+        <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Lozimni kiriting</p>
+        <BaseInput class="mt-1" placeholder="Lavozim" v-model="leader.position" />
+      </div>
+      <div class="mt-2">
+        <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Manzilni kiriting</p>
+        <BaseInput class="mt-1" placeholder="Manzil" v-model="leader.address" />
+      </div>
+      <div class="mt-2">
+        <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Tugilgan sanani kiriting</p>
+        <BaseDatepicker class="mt-1" v-model="leader.birthday" />
+      </div>
+      <div class="mt-2">
+        <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Passport ma'lumotlari kiriting
+        </p>
+        <BaseInput class="mt-1" placeholder="Passport ma'lumot" v-model="leader.pass_information" />
+      </div>
+      <div class="mt-2">
+        <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Ish-tajribasini kiriting</p>
+        <BaseTextarea class="mt-1" placeholder="Ish-tajriba" v-model="leader.experience" />
+      </div>
+      <div class="grid grid-cols-2 gap-10 mt-3">
+        <BaseButton label="Bekor qilish" @click="modalClicked('cancel')" />
+        <BaseButton label="Saqlash" @click="modalClicked('save')" />
+      </div>
+    </BaseModal>
+
+    <!-- create modal -->
   </div>
 </template>
 <style scoped>

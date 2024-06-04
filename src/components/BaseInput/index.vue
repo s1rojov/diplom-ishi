@@ -18,7 +18,7 @@ const props = defineProps({
 <template>
   <div>
     <input
-      class="w-full border rounded-lg text-base text-[#575757] font-normal text-[12px] leading-[0.44px] py-2 px-[10px] bg-[#F8F8F9] outline-none focus:border-[#C49E5E] placeholder:text-[#575757] placeholder:text-sm placeholder:font-normal placeholder:leading-3"
+      class="w-full border rounded-lg text-sm text-[#575757] font-normal leading-[0.44px] py-2 px-[10px] bg-[#F8F8F9] outline-none focus:border-[#C49E5E] placeholder:text-[#575757] placeholder:text-sm placeholder:font-normal placeholder:leading-3"
       :type="props.type" :value="props.modelValue" @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         " :placeholder="props.placeholder" />
