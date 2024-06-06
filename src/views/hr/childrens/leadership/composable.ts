@@ -1,24 +1,20 @@
 import { ref, onMounted } from 'vue';
+// import { useToastification } from 'src/helpers/toast';
+// const { toast } = useToastification();
 import { storeToRefs } from 'pinia';
 import { useLeaderStore } from './store';
 export function useLeadershipFn() {
   const store = useLeaderStore()
-  const { getAllLeader, deleteLeader, createNewLeader } = store
-  const { data, notifyModal, createModal } = storeToRefs(store)
-  const leader = ref<any>({
-    fullname: '',
-    phone: '',
-    position: '',
-    address: '',
-    birthday: '',
-    pass_information: '',
-    experience: ''
-  })
+  const { getAllLeader, deleteLeader, createNewLeader, getLeaderById, updateLeader } = store
+  const { data, notifyModal, createModal, leader } = storeToRefs(store)
 
 
   const selectedItemId = ref<any>(null)
+  const isUpdate = ref<boolean>(false)
   const updateItemFn = (id: any) => {
-    console.log(id)
+    getLeaderById(id)
+    isUpdate.value = true
+    selectedItemId.value = id
   };
 
   function modalClicked(val: string) {
@@ -33,12 +29,21 @@ export function useLeadershipFn() {
         pass_information: '',
         experience: ''
       }
-
     }
     else if (val == 'save') {
-      createNewLeader(leader.value).then(() => {
-        createModal.value = false
-      })
+      const updateBirth = leader.value.birthday.split('/')
+      leader.value.birthday = `${updateBirth[1]}.${updateBirth[0]}.${updateBirth[2]}`
+      if (isUpdate.value) {
+        updateLeader(selectedItemId.value).then(() => {
+          isUpdate.value = false
+          selectedItemId.value = null
+        })
+      }
+      else {
+        createNewLeader().then(() => {
+          createModal.value = false
+        })
+      }
     }
   }
 
@@ -67,6 +72,5 @@ export function useLeadershipFn() {
     deleteItemFn,
     actionFn,
     modalClicked,
-    leader
   };
 }

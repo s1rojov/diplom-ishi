@@ -14,15 +14,15 @@ export function useLayoutFn(): any {
       router: '/leadership',
     },
     {
-      title: 'Fakultet',
+      title: "Bo'linma",
       icon: 'division',
-      router: '/faculty',
+      router: '/division',
     },
-    // {
-    //   title: "Bo'lim",
-    //   icon: 'department',
-    //   router: '/department',
-    // },
+    {
+      title: "Bo'lim",
+      icon: 'department',
+      router: '/department',
+    },
     // {
     //   title: "Yo'nalish",
     //   icon: 'direction',

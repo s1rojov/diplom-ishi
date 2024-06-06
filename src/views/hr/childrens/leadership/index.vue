@@ -7,8 +7,8 @@ import { useLeadershipFn } from './composable'
 import { storeToRefs } from 'pinia';
 import { useLeaderStore } from './store';
 const store = useLeaderStore()
-const { notifyModal, createModal } = storeToRefs(store)
-const { data, deleteItemFn, updateItemFn, actionFn, leader, modalClicked }: any = useLeadershipFn()
+const { notifyModal, createModal, leader } = storeToRefs(store)
+const { data, deleteItemFn, updateItemFn, actionFn, modalClicked }: any = useLeadershipFn()
 
 </script>
 <template>
@@ -16,7 +16,7 @@ const { data, deleteItemFn, updateItemFn, actionFn, leader, modalClicked }: any 
     <div class="border bg-white border-neutral-400/40 py-3 px-4 rounded-2xl flex items-center justify-between">
       <div>
         <div class="text-zinc-950 text-lg font-semibold leading-relaxed tracking-wide">
-          Rahbariyat
+          Toshkent Temir Yo'l Texnikumi rahbariyat a'zolari
           <sup>{{ data.length }}</sup>
         </div>
         <span class="text-neutral-400 text-xs font-normal leading-normal tracking-wide">Ushbu bo’limda katalog

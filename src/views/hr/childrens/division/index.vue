@@ -2,11 +2,11 @@
 import { storeToRefs } from 'pinia';
 import BaseDivisionCard from 'src/components/BaseDivisionCard/index.vue'
 import NotificationModal from 'src/components/NotificationModal/index.vue'
-import { useDepartmentFn } from './composable';
-import { useDepartmentStore } from './store';
-const store = useDepartmentStore()
-const { data, notifyModal, createModal, department } = storeToRefs(store)
-const { deleteItemFn, updateItemFn, actionFn, modalClicked } = useDepartmentFn()
+import { useDivisionFn } from './composable';
+import { useDivisionStore } from './store';
+const store = useDivisionStore()
+const { data, notifyModal, createModal, division } = storeToRefs(store)
+const { deleteItemFn, updateItemFn, actionFn, modalClicked } = useDivisionFn()
 
 </script>
 <template>
@@ -14,7 +14,7 @@ const { deleteItemFn, updateItemFn, actionFn, modalClicked } = useDepartmentFn()
     <div class="border bg-white border-neutral-400/40 py-3 px-4 rounded-2xl flex items-center justify-between">
       <div>
         <div class="text-zinc-950 text-lg font-semibold leading-relaxed tracking-wide">
-          Toshkent Temir Yo'l Texnikumi bo'limlari
+          Toshkent Temir Yo'l Texnikumi bo'linmalari
           <sup>{{ data.length }}</sup>
         </div>
         <span class="text-neutral-400 text-xs font-normal leading-normal tracking-wide">Ushbu bo’limda katalog
@@ -40,12 +40,12 @@ const { deleteItemFn, updateItemFn, actionFn, modalClicked } = useDepartmentFn()
       <div class="mt-3">
         <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Bo'linmaning qisqa nomini kiriting
         </p>
-        <BaseInput class="mt-1" placeholder="Qisqa nomi" v-model="department.shortname" />
+        <BaseInput class="mt-1" placeholder="Qisqa nomi" v-model="division.shortname" />
       </div>
       <div class="mt-2">
         <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Bo'linmaning to'liq nomini kiriting
         </p>
-        <BaseInput class="mt-1" placeholder="To'liq nomi" v-model="department.fullname" />
+        <BaseInput class="mt-1" placeholder="To'liq nomi" v-model="division.fullname" />
       </div>
       <div class="grid grid-cols-2 gap-10 mt-3">
         <BaseButton label="Bekor qilish" @click="modalClicked('cancel')" />

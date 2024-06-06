@@ -2,28 +2,22 @@ import { defineStore } from 'pinia';
 import { api } from 'boot/axios';
 import { useToastification } from 'src/helpers/toast';
 const { toast } = useToastification();
-export const useLeaderStore = defineStore('leaderStore', {
+export const useDivisionStore = defineStore('divisionStore', {
     state: () => {
         return {
             data: [],
             notifyModal: false,
             createModal: false,
-            updatedData: {},
-            leader: {
+            division: {
                 fullname: '',
-                phone: '',
-                position: '',
-                address: '',
-                birthday: '',
-                pass_information: '',
-                experience: ''
+                shortname: ''
             }
         };
     },
     actions: {
-        async getAllLeader() {
+        async getAllDivision() {
             await api
-                .get('leadership')
+                .get('division')
                 .then((res: any) => {
                     this.data = res.data
                 })
@@ -36,20 +30,31 @@ export const useLeaderStore = defineStore('leaderStore', {
                     });
                 });
         },
-        async deleteLeader(id: any) {
-            api.delete(`leadership/${id}`).then(() => {
-                this.getAllLeader()
+        async deleteDivision(id: any) {
+            api.delete(`division/${id}`).then(() => {
+                this.getAllDivision()
                 toast({
                     position: 'top-right',
                     type: 'positive',
                     message: "Muvaffaqqiyatli o'chirildi",
                     time: 3000,
                 });
+            }).catch((error: any) => {
+                toast({
+                    position: 'top-right',
+                    type: 'negative',
+                    message: error.message,
+                    time: 3000,
+                });
             })
         },
-        async createNewLeader() {
-            await api.post('leadership', this.leader).then(() => {
-                this.getAllLeader()
+        async createNewDivision() {
+            await api.post('division', this.division).then(() => {
+                this.getAllDivision()
+                this.division = {
+                    fullname: '',
+                    shortname: ''
+                }
                 toast({
                     position: 'top-right',
                     type: 'positive',
@@ -65,21 +70,16 @@ export const useLeaderStore = defineStore('leaderStore', {
                 });
             })
         },
-        async getLeaderById(id: any) {
-            await api.get(`leadership/${id}`).then((res: any) => {
+        async getDivisionById(id: any) {
+            await api.get(`division/${id}`).then((res: any) => {
                 this.createModal = true
-                this.leader.fullname = res.data?.fullname
-                this.leader.phone = res.data?.phone
-                this.leader.position = res.data?.position
-                this.leader.address = res.data?.address
-                this.leader.birthday = res.data?.birthday.substring(0, 10)
-                this.leader.pass_information = res.data?.pass_information
-                this.leader.experience = res.data?.experience
+                this.division.fullname = res.data?.fullname
+                this.division.shortname = res.data?.shortname
             })
         },
-        async updateLeader(id: any) {
-            await api.put(`leadership/${id}`, this.leader).then(() => {
-                this.getAllLeader()
+        async updateDivision(id: any) {
+            await api.put(`division/${id}`, this.division).then(() => {
+                this.getAllDivision()
                 this.createModal = false
                 toast({
                     position: 'top-right',

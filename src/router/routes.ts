@@ -27,16 +27,16 @@ const routes: RouteRecordRaw[] = [
               import('src/views/hr/childrens/leadership/index.vue'),
           },
           {
-            path: 'faculty',
-            name: 'Faculty',
-            component: () => import('src/views/hr/childrens/faculty/index.vue'),
+            path: 'division',
+            name: 'Division',
+            component: () => import('src/views/hr/childrens/division/index.vue'),
           },
-          // {
-          //   path: 'department',
-          //   name: 'Department',
-          //   component: () =>
-          //     import('src/views/hr/childrens/department/index.vue'),
-          // },
+          {
+            path: 'department',
+            name: 'Department',
+            component: () =>
+              import('src/views/hr/childrens/department/index.vue'),
+          },
           // {
           //   path: 'direction',
           //   name: 'Direction',
