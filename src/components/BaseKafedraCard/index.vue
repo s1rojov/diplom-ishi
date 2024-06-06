@@ -15,8 +15,14 @@ const handeClicked = (val: string, id: any) => {
 }
 </script>
 <template>
-    <div class="bg-white rounded-2xl h-48 relative p-4 border border-gray-400/opacity-20">
+    <div class="bg-white rounded-2xl h-[240px] relative p-4 border border-gray-400/opacity-20">
         <div>
+            <p class="text-neutral-300 text-xs font-medium leading-[10px] tracking-wide">Bo'linma nomi:</p>
+            <p class="text-neutral-500 text-sm font-normal leading-[18.89px] mt-1 tracking-wide">
+                {{ data?.division }}
+            </p>
+        </div>
+        <div class="mt-2">
             <p class="text-neutral-300 text-xs font-medium leading-[10px] tracking-wide">Qisqa nomi:</p>
             <p class="text-neutral-500 text-sm font-normal leading-[18.89px] mt-1 tracking-wide">
                 {{ data?.shortname }}

@@ -43,11 +43,11 @@ const routes: RouteRecordRaw[] = [
           //   component: () =>
           //     import('src/views/hr/childrens/direction/index.vue'),
           // },
-          // {
-          //   path: 'kafedra',
-          //   name: 'Kafedra',
-          //   component: () => import('src/views/hr/childrens/kafedra/index.vue'),
-          // },
+          {
+            path: 'kafedra',
+            name: 'Kafedra',
+            component: () => import('src/views/hr/childrens/kafedra/index.vue'),
+          },
           // {
           //   path: 'position',
           //   name: 'Position hr',

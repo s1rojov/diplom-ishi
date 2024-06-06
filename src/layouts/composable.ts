@@ -28,11 +28,11 @@ export function useLayoutFn(): any {
     //   icon: 'direction',
     //   router: '/direction',
     // },
-    // {
-    //   title: 'Kafedra',
-    //   icon: 'kafedra',
-    //   router: '/kafedra',
-    // },
+    {
+      title: 'Kafedra',
+      icon: 'kafedra',
+      router: '/kafedra',
+    },
     // {
     //   title: 'Shtatlar',
     //   icon: 'shtat',
