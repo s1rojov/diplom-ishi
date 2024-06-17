@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PropType, toRefs, ref, watch, computed } from 'vue';
 
-const emit = defineEmits(['selectedItem'])
+const emit = defineEmits(['selectedItem', 'select'])
 const props = defineProps({
   defaultTitle: {
     type: String as PropType<string>,
@@ -33,10 +33,11 @@ const props = defineProps({
 
 
 const selectedItemVal = ref<any>('')
-function clickedItem(label: any, val: any) {
+function clickedItem(label: any, val: any, item: any) {
   selectedItemVal.value = label
   visibleItemsFn('close')
   emit('selectedItem', val)
+  emit('select', item)
 }
 const isVisible = ref<boolean>(false)
 function visibleItemsFn(arg: string) {
@@ -58,7 +59,7 @@ window.addEventListener('click', () => {
   <div class="flex flex-col items-stretch relative">
     <q-list class="absolute w-full bottom-12">
       <div v-if="isVisible" class="rounded bg-stone-100  border mt-2 px-1 py-1 z-max">
-        <div v-for="item, index in props.options" :key="index" @click.stop="clickedItem(item.label, item.value)"
+        <div v-for="item, index in props.options" :key="index" @click.stop="clickedItem(item.label, item.value, item)"
           class="px-1.5 rounded text-sm cursor-pointer transition-all py-2 hover:bg-white">
           {{ item.label }}
         </div>
