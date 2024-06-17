@@ -36,12 +36,17 @@ export default route(function (/* { store, ssrContext } */) {
 
   // token uchun
   Router.beforeEach((to, _, next) => {
-    const isAuthenticated: any = sessionStorage.getItem('access');
-    if (to.path !== '/login' && !isAuthenticated) {
+    const isAdmin: any = sessionStorage.getItem('admin');
+    const isEmployee: any = sessionStorage.getItem('employee');
+    if (to.path !== '/login' && !isAdmin) {
       next({ name: 'Login page' });
-    } else if (to.path === '' && !!isAuthenticated) {
-      next({ name: 'HR' });
-    } else {
+    } else if (to.path === '' && !!isAdmin) {
+      next({ name: 'Dashboard' });
+    }
+    else if (to.path === '' && !!isEmployee) {
+      next({ name: 'Private data' })
+    }
+    else {
       next();
     }
   });

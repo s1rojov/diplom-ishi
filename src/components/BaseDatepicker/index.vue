@@ -21,7 +21,7 @@ function openPicker() {
 <template>
     <div class="relative">
         <div @click.stop="openPicker"
-            class="w-full border cursor-pointer rounded-lg text-sm text-[#575757] py-2 px-[10px] font-normal bg-[#F8F8F9] outline-none focus:border-[#C49E5E]">
+            class="w-full border cursor-pointer rounded-lg text-sm text-[#575757] py-2 px-[10px] font-normal bg-white outline-none focus:border-[#C49E5E]">
             <p>{{ modelValue ? modelValue : 'dd/mm/yyyy' }}</p>
 
         </div>

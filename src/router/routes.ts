@@ -10,12 +10,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '',
+        path: '/hr',
         name: 'HR',
         component: () => import('src/views/hr/index.vue'),
         children: [
           {
-            path: 'dashboard',
+            path: '',
             name: 'Dashboard',
             component: () =>
               import('src/views/hr/childrens/dashboard/index.vue'),
@@ -48,12 +48,24 @@ const routes: RouteRecordRaw[] = [
             name: 'Kafedra',
             component: () => import('src/views/hr/childrens/kafedra/index.vue'),
           },
-          // {
-          //   path: 'position',
-          //   name: 'Position hr',
-          //   component: () =>
-          //     import('src/views/hr/childrens/position/index.vue'),
-          // },
+          {
+            path: 'position',
+            name: 'Position hr',
+            component: () =>
+              import('src/views/hr/childrens/position/index.vue'),
+          },
+          {
+            path: 'employee',
+            name: 'Employee hr',
+            component: () =>
+              import('src/views/hr/childrens/employee/index.vue'),
+          },
+          {
+            path: 'application',
+            name: 'Application',
+            component: () =>
+              import('src/views/hr/childrens/application/index.vue')
+          }
         ],
       },
       {
@@ -61,6 +73,23 @@ const routes: RouteRecordRaw[] = [
         name: 'Admin',
         component: () => import('src/views/admin/index.vue'),
       },
+      {
+        path: 'employee',
+        name: 'Employee',
+        component: () => import('src/views/employee/index.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Private data',
+            component: () => import('src/views/employee/private/index.vue')
+          },
+          {
+            path: 'application',
+            name: 'Private data',
+            component: () => import('src/views/employee/application/index.vue')
+          }
+        ]
+      }
     ],
   },
 

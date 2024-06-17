@@ -2,18 +2,32 @@
 import BaseInput from 'src/components/BaseInput/index.vue'
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from 'src/views/auth/store';
+import { ref } from 'vue';
 const store = useAuthStore();
-const { data } = storeToRefs(store);
-const { getAccessToSystem } = store;
+const { data, employee_code } = storeToRefs(store);
+const { getAccessToSystem, getAccessForEmployee } = store;
+const selectRole = ref<any>('')
 </script>
 <template>
   <div class="absolute flex items-center top-0 left-0 bottom-0 right-0 justify-center m-auto">
     <div class="w-1/3">
       <div class="flex flex-col items-center">
         <BaseIcon name="logo" class="w-24 h-24 cursor-pointer" />
-        <p class="text-2xl font-normal text-[#17181A] pt-5">Tizimga kirish</p>
+        <p class="text-2xl font-normal text-[#17181A] pt-5">{{ selectRole == '' ? "Rolni tanlang" : 'Tizimga kirish' }}
+        </p>
       </div>
-      <div class="flex flex-col gap-3">
+      <div class="mt-5" v-if="selectRole == ''">
+        <BaseButton label="Hodim" class="w-full" @click="selectRole = 'employee'" />
+        <BaseButton label="Hr manager" class="w-full mt-3" @click="selectRole = 'admin'" />
+      </div>
+      <div v-if="selectRole == 'employee'">
+        <div>
+          <p class="text-base text-zinc-950 pb-1">Login</p>
+          <BaseInput type="text" placeholder="Your unique code" v-model="employee_code" />
+        </div>
+        <BaseButton label="Kirish" class="mt-3" @click="getAccessForEmployee" />
+      </div>
+      <div class="flex flex-col gap-3" v-if="selectRole == 'admin'">
         <div>
           <p class="text-base text-zinc-950 pb-1">Login</p>
           <BaseInput type="text" placeholder="Your login" v-model="data.login" />

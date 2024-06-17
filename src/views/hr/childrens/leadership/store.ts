@@ -7,6 +7,7 @@ export const useLeaderStore = defineStore('leaderStore', {
         return {
             data: [],
             notifyModal: false,
+            loading: false,
             createModal: false,
             updatedData: {},
             leader: {
@@ -22,10 +23,12 @@ export const useLeaderStore = defineStore('leaderStore', {
     },
     actions: {
         async getAllLeader() {
+            this.loading = true
             await api
                 .get('leadership')
                 .then((res: any) => {
                     this.data = res.data
+                    this.loading = false
                 })
                 .catch((error: any) => {
                     toast({

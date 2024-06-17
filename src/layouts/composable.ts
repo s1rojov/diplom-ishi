@@ -6,59 +6,56 @@ export function useLayoutFn(): any {
     {
       title: 'Dashboard',
       icon: 'leadership',
-      router: '/dashboard',
+      router: '/hr',
     },
     {
       title: 'Rahbariyat',
       icon: 'hr',
-      router: '/leadership',
+      router: '/hr/leadership',
     },
     {
       title: "Bo'linma",
       icon: 'division',
-      router: '/division',
+      router: '/hr/division',
     },
     {
       title: "Bo'lim",
       icon: 'department',
-      router: '/department',
+      router: '/hr/department',
     },
-    // {
-    //   title: "Yo'nalish",
-    //   icon: 'direction',
-    //   router: '/direction',
-    // },
     {
       title: 'Kafedra',
       icon: 'kafedra',
-      router: '/kafedra',
+      router: '/hr/kafedra',
     },
-    // {
-    //   title: 'Shtatlar',
-    //   icon: 'shtat',
-    //   router: '/shtat',
-    // },
-    // {
-    //   title: 'Lavozim',
-    //   icon: 'lavozim',
-    //   router: '/position',
-    // },
-    // {
-    //   title: "Ish o'rni",
-    //   icon: 'employePlace',
-    //   router: '/work-place',
-    // },
-    // {
-    //   title: 'Ishchi-hodim',
-    //   icon: 'workerEmploye',
-    //   router: '/worker-employee',
-    // },
-    // {
-    //   title: 'Hodim',
-    //   icon: 'user',
-    //   router: '/employee',
-    // },
+    {
+      title: 'Lavozim',
+      icon: 'lavozim',
+      router: '/hr/position',
+    },
+    {
+      title: 'Hodim',
+      icon: 'user',
+      router: '/hr/employee',
+    },
+    {
+      title: 'Arizalar',
+      icon: 'employePlace',
+      router: '/hr/application',
+    },
   ]);
+  const employeeItems = ref<SidebarItem[]>([
+    {
+      title: 'Dashboard',
+      icon: 'leadership',
+      router: '/profile',
+    },
+    {
+      title: 'Ariza',
+      icon: 'hr',
+      router: '/profile/application'
+    }
+  ])
   function reverseVariable(val: string) {
     if (val == 'enter') {
       isEnter.value = true;
@@ -70,5 +67,6 @@ export function useLayoutFn(): any {
     hrItems,
     reverseVariable,
     isEnter,
+    employeeItems
   };
 }
