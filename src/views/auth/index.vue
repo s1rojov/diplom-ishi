@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import BaseInput from 'src/components/BaseInput/index.vue'
-import { storeToRefs } from 'pinia';
-import { useAuthStore } from 'src/views/auth/store';
-import { ref } from 'vue';
-const store = useAuthStore();
-const { data, employee_code } = storeToRefs(store);
-const { getAccessToSystem, getAccessForEmployee } = store;
+import { ref } from 'vue'
+import { useAuthFn } from './composable';
+const { enterToEmployee, hr, employee_code, enterToHr } = useAuthFn()
 const selectRole = ref<any>('')
 </script>
 <template>
@@ -25,18 +22,20 @@ const selectRole = ref<any>('')
           <p class="text-base text-zinc-950 pb-1">Login</p>
           <BaseInput type="text" placeholder="Your unique code" v-model="employee_code" />
         </div>
-        <BaseButton label="Kirish" class="mt-3" @click="getAccessForEmployee" />
+        <BaseButton label="Kirish" class="mt-3" @click="enterToEmployee" />
+        <p class="underline mt-2 cursor-pointer" @click="selectRole = ''">Ortga</p>
       </div>
       <div class="flex flex-col gap-3" v-if="selectRole == 'admin'">
         <div>
           <p class="text-base text-zinc-950 pb-1">Login</p>
-          <BaseInput type="text" placeholder="Your login" v-model="data.login" />
+          <BaseInput type="text" placeholder="Your login" v-model="hr.login" />
         </div>
         <div>
           <p class="text-base text-zinc-950 pb-1">Password</p>
-          <BaseInput type="text" placeholder="Your password" v-model="data.password" />
+          <BaseInput type="text" placeholder="Your password" v-model="hr.password" />
         </div>
-        <BaseButton label="Kirish" class="w-full" @click="getAccessToSystem" />
+        <BaseButton label="Kirish" class="w-full" @click="enterToHr" />
+        <p class="underline mt-2 cursor-pointer" @click="selectRole = ''">Ortga</p>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/login',
-    name: 'Login page',
+    name: 'Login',
     component: () => import('src/views/auth/index.vue'),
   },
   {
@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '/hr',
+        path: 'hr',
         name: 'HR',
         component: () => import('src/views/hr/index.vue'),
         children: [
@@ -62,7 +62,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             path: 'application',
-            name: 'Application',
+            name: 'Application hr',
             component: () =>
               import('src/views/hr/childrens/application/index.vue')
           }
@@ -85,7 +85,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             path: 'application',
-            name: 'Private data',
+            name: 'Application',
             component: () => import('src/views/employee/application/index.vue')
           }
         ]

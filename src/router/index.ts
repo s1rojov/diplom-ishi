@@ -35,21 +35,35 @@ export default route(function (/* { store, ssrContext } */) {
   });
 
   // token uchun
-  Router.beforeEach((to, _, next) => {
-    const isAdmin: any = sessionStorage.getItem('admin');
-    const isEmployee: any = sessionStorage.getItem('employee');
-    if (to.path !== '/login' && !isAdmin) {
-      next({ name: 'Login page' });
-    } else if (to.path === '' && !!isAdmin) {
-      next({ name: 'Dashboard' });
-    }
-    else if (to.path === '' && !!isEmployee) {
-      next({ name: 'Private data' })
-    }
-    else {
+  // Router.beforeEach((to, from, next) => {
+  //   const data: any = sessionStorage.getItem('userInfo');
+  //   const user = JSON.parse(data)
+  //   if (to.name !== 'Login' && !user?.access) next({ name: 'Login' })
+  //   else if (to.path === '') next({ name: 'Login' })
+  //   else if (to.path === '' && user?.hr && user?.access) next({ name: 'Dashboard' })
+  //   else if (to.path === '' && user?.employee && user?.access) next({ name: 'Private data' })
+  //   else next()
+  // });
+
+  Router.beforeEach((to, from, next) => {
+    const data = sessionStorage.getItem('userInfo');
+    const user = data ? JSON.parse(data) : null;
+
+    if (to.name !== 'Login' && (!user || !user.access)) {
+      next({ name: 'Login' });
+    } else if (to.path === '') {
+      if (user?.hr && user?.access) {
+        next({ name: 'Dashboard' });
+      } else if (user?.employee && user?.access) {
+        next({ name: 'Private data' });
+      } else {
+        next({ name: 'Login' });
+      }
+    } else {
       next();
     }
   });
+
 
   return Router;
 });

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 </script>
 <template>
-    <div>
-        this is application page
+    <div class="p-5">
     </div>
 </template>

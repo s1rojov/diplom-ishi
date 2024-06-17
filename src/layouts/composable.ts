@@ -46,14 +46,14 @@ export function useLayoutFn(): any {
   ]);
   const employeeItems = ref<SidebarItem[]>([
     {
-      title: 'Dashboard',
+      title: "Shaxsiy ma'lumotlar",
       icon: 'leadership',
-      router: '/profile',
+      router: '/employee',
     },
     {
       title: 'Ariza',
       icon: 'hr',
-      router: '/profile/application'
+      router: '/employee/application'
     }
   ])
   function reverseVariable(val: string) {
