@@ -47,16 +47,12 @@ function selectLeadership(val: any) {
                     <BaseSelect class="mt-1" :options="leadershipList" />
                 </div> -->
                 <div class="mt-2">
-                    <p>Kimdan:</p>
-                    <BaseInput class="mt-1" v-model="application.from" placeholder="F.I.O" />
-                </div>
-                <div class="mt-2">
                     <p>Qachondan:</p>
-                    <BaseDatepicker class="mt-1" v-model="application.dateOn" placeholder="F.I.O" />
+                    <BaseDatepicker class="mt-1" v-model="application.dateOn" />
                 </div>
                 <div class="mt-2">
                     <p>Qachongacha:</p>
-                    <BaseDatepicker class="mt-1" placeholder="F.I.O" v-model="application.dateEnd" />
+                    <BaseDatepicker class="mt-1" v-model="application.dateEnd" />
                 </div>
                 <BaseButton label="Generate" class="mt-5" @click="generatePdf" />
             </div>
