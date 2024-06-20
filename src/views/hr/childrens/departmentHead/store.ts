@@ -34,7 +34,7 @@ export const useDepartmentHeadStore = defineStore('useDepartmentHeadStore', {
                 .then((res: any) => {
                     this.data = []
                     res.data.forEach((item: any) => {
-                        if (item.is_head == 'true') {
+                        if (item.is_head) {
                             this.data.push(item)
                         }
                     })

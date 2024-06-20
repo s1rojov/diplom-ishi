@@ -23,10 +23,10 @@ const defaulValue = ref<boolean>(false)
 function checkHeadFn() {
     defaulValue.value = !defaulValue.value
     if (defaulValue.value) {
-        employee.value.is_head = 'true'
+        employee.value.is_head = true
     }
     else {
-        employee.value.is_head = 'false'
+        employee.value.is_head = false
     }
 }
 </script>

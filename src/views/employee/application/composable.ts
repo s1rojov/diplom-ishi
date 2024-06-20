@@ -3,9 +3,13 @@ import QRCode from 'qrcode';
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useEmpStore } from 'src/views/employee/private/store'
+import { useAppStore } from './store';
 export function useApplicationFn() {
     const empStore = useEmpStore()
+    const store = useAppStore()
+    const { createApplication } = store
     const { employee }: any = storeToRefs(empStore)
+    const { app } = storeToRefs(store)
     const application = ref<any>({
         to: '',
         dateOn: '',
@@ -29,12 +33,20 @@ export function useApplicationFn() {
             value: 'leave'
         }
     ]
+    function returnDateFormat(date: any) {
+        const newDate = date.split('/')
+        return `${newDate[1]}.${newDate[0]}.${newDate[2]}`
+    }
+    function senApplication() {
+        app.value.dateOn = returnDateFormat(application.value.dateOn)
+        app.value.app_type = preferred.value
+        app.value.dateEnd = returnDateFormat(application.value.dateEnd)
+        createApplication()
+    }
 
 
 
     function generatePdf() {
-
-
         const today = new Date();
 
         const day = today.getDate();
@@ -79,6 +91,7 @@ export function useApplicationFn() {
         generatePdf,
         pdfSrc,
         preferred,
-        options
+        options,
+        senApplication,
     }
 }

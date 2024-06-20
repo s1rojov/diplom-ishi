@@ -10,6 +10,7 @@ export const useEmployeeStore = defineStore('employeeStore', {
             createModal: false,
             visibleKafedraList: true,
             visibleDepartmentList: true,
+            headList: [],
             employee: {
                 fullname: '',
                 phone: '',
@@ -122,32 +123,6 @@ export const useEmployeeStore = defineStore('employeeStore', {
                 this.employee.is_head = res.data?.is_head
             })
         },
-        // async getKafedraList() {
-        //     await api.get('employeeType/kafedraList').then((res: any) => {
-        //         this.kafedraList = res.data
-        //     })
-        //         .catch((error: any) => {
-        //             toast({
-        //                 position: 'top-right',
-        //                 type: 'negative',
-        //                 message: error.message,
-        //                 time: 3000,
-        //             });
-        //         })
-        // },
-        // async getDepartmentList() {
-        //     await api.get('employeeType/departmentList').then((res: any) => {
-        //         this.departmentList = res.data
-        //     })
-        //         .catch((error: any) => {
-        //             toast({
-        //                 position: 'top-right',
-        //                 type: 'negative',
-        //                 message: error.message,
-        //                 time: 3000,
-        //             });
-        //         })
-        // },
         async updateEmployee(id: any) {
             await api.put(`employee/${id}`, this.employee).then(() => {
                 this.getAllEmployee()
