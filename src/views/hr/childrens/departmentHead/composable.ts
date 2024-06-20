@@ -1,8 +1,8 @@
 import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useEmployeeStore } from './store'
-export function useEmployeeFn() {
-    const store = useEmployeeStore()
+import { useDepartmentHeadStore } from './store'
+export function useDepartmentHeadFn() {
+    const store = useDepartmentHeadStore()
     const { getAllEmployee, deleteEmployee, getEmployeeById, updateEmployee, createNewEmployee, getPositionList } = store
 
     const { notifyModal, createModal, employee } = storeToRefs(store)

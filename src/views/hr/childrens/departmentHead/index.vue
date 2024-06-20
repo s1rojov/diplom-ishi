@@ -5,18 +5,19 @@ import NotificationModal from 'src/components/NotificationModal/index.vue'
 import BaseSelect from 'src/components/BaseSelect/index.vue'
 import BaseTextarea from 'src/components/BaseTextarea/index.vue'
 import BaseDatepicker from 'src/components/BaseDatepicker/index.vue'
-import { useEmployeeFn } from './composable';
-import { useEmployeeStore } from './store';
+import { useDepartmentHeadFn } from './composable';
+import { useDepartmentHeadStore } from './store';
 import { ref } from 'vue';
-const store = useEmployeeStore()
+const store = useDepartmentHeadStore()
 const { data, notifyModal, createModal, employee, positionList }: any = storeToRefs(store)
-const { deleteItemFn, updateItemFn, actionFn, modalClicked, shtatList } = useEmployeeFn()
+const { deleteItemFn, updateItemFn, actionFn, modalClicked, shtatList } = useDepartmentHeadFn()
 function select3Fn(val: any) {
     employee.value.employee_type_id = val
 }
 function selectFn(val: any) {
     employee.value.shtat = val
 }
+
 const defaulValue = ref<boolean>(false)
 
 function checkHeadFn() {
@@ -34,7 +35,7 @@ function checkHeadFn() {
         <div class="border bg-white border-neutral-400/40 py-3 px-4 rounded-2xl flex items-center justify-between">
             <div>
                 <div class="text-zinc-950 text-lg font-semibold leading-relaxed tracking-wide">
-                    Toshkent Temir Yo'l Texnikumi hodimlari
+                    Toshkent Temir Yo'l Texnikumi bo'lim boshliqlari va kafedra mudirlari
                     <sup>{{ data.length }}</sup>
                 </div>
                 <span class="text-neutral-400 text-xs font-normal leading-normal tracking-wide">Ushbu bo’limda katalog
@@ -74,15 +75,15 @@ function checkHeadFn() {
                 <BaseSelect class="mt-1" :options="positionList" :id="employee.employee_type_id"
                     @selectedItem="select3Fn" defaultTitle="Lavozimni tanlang" />
             </div>
-            <div class="mt-2 flex items-center justify-start gap-2">
+            <div class="mt-2">
                 <!-- <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Lavozimni kiriting</p> -->
                 <!-- <BaseSelect class="mt-1" :options="positionList" :id="employee.employee_type_id"
                     @selectedItem="select3Fn" defaultTitle="Lavozimni tanlang" /> -->
-                <!-- <q-checkbox @toggle="checkHeadFn" v-model="employee.is_head" size="sm"
+                <!-- <q-checkbox :val="employee.is_head" v-model="employee.is_head" size="sm"
                     label="Bo'lim yoki kafedra boshlig'i" /> -->
-
                 <input type="checkbox" v-model="defaulValue" @click="checkHeadFn" name="is_head" id="is_head">
                 <label class="select-none" for="is_head">Bo'lim yoki kafedra boshlig'i</label>
+
             </div>
             <div class="mt-2">
                 <p class="text-neutral-500 text-xs font-medium leading-[15px] tracking-wide">Manzilni kiriting</p>

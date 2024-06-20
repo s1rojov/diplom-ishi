@@ -29,6 +29,11 @@ export function useLayoutFn(): any {
       router: '/hr/kafedra',
     },
     {
+      title: "Bo'lim boshliqlari",
+      icon: 'group',
+      router: '/hr/department-head',
+    },
+    {
       title: 'Lavozim',
       icon: 'lavozim',
       router: '/hr/position',

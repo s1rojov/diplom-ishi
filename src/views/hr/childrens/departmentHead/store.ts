@@ -2,10 +2,10 @@ import { defineStore } from 'pinia';
 import { api } from 'boot/axios';
 import { useToastification } from 'src/helpers/toast';
 const { toast } = useToastification();
-export const useEmployeeStore = defineStore('employeeStore', {
+export const useDepartmentHeadStore = defineStore('useDepartmentHeadStore', {
     state: () => {
         return {
-            data: [],
+            data: [] as any[],
             notifyModal: false,
             createModal: false,
             visibleKafedraList: true,
@@ -32,7 +32,12 @@ export const useEmployeeStore = defineStore('employeeStore', {
             await api
                 .get('employee')
                 .then((res: any) => {
-                    this.data = res.data
+                    this.data = []
+                    res.data.forEach((item: any) => {
+                        if (item.is_head == 'true') {
+                            this.data.push(item)
+                        }
+                    })
                 })
                 .catch((error: any) => {
                     toast({

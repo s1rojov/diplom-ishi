@@ -37,12 +37,12 @@ const routes: RouteRecordRaw[] = [
             component: () =>
               import('src/views/hr/childrens/department/index.vue'),
           },
-          // {
-          //   path: 'direction',
-          //   name: 'Direction',
-          //   component: () =>
-          //     import('src/views/hr/childrens/direction/index.vue'),
-          // },
+          {
+            path: 'department-head',
+            name: 'Department head',
+            component: () =>
+              import('src/views/hr/childrens/departmentHead/index.vue'),
+          },
           {
             path: 'kafedra',
             name: 'Kafedra',
